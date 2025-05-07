@@ -33,11 +33,11 @@ public class Usuario {
 
     @Column(nullable=false)
 
-    private String nombre;
+    private String nombres;
 
     @Column(nullable=false)
 
-    private String apellido;
+    private String apellidos;
 
     @Column(nullable=true)
 
