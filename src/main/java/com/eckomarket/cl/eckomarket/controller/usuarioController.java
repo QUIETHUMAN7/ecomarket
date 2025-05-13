@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/usuarios")
-public class EcomarketController {
+public class usuarioController {
     @Autowired
     private com.eckomarket.cl.eckomarket.service.usuarioService usuarioService;
 
