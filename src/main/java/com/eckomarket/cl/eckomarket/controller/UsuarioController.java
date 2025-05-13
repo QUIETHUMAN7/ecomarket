@@ -1,6 +1,7 @@
 package com.eckomarket.cl.eckomarket.controller;
 
 import com.eckomarket.cl.eckomarket.model.Usuario;
+import com.eckomarket.cl.eckomarket.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +11,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/usuarios")
-public class usuarioController {
+public class UsuarioController {
     @Autowired
-    private com.eckomarket.cl.eckomarket.service.usuarioService usuarioService;
+    private UsuarioService usuarioService;
 
     @GetMapping
     public ResponseEntity<List<Usuario>> listar(){
@@ -24,7 +25,7 @@ public class usuarioController {
     }
     @PostMapping
     public ResponseEntity<Usuario> guardar(@RequestBody Usuario usuario) {
-        Usuario productoNuevo = com.eckomarket.cl.eckomarket.service.usuarioService.save(usuario);
+        Usuario productoNuevo = UsuarioService.save(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(productoNuevo);
 
     }

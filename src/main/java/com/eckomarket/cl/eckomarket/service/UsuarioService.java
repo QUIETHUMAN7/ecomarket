@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class usuarioService {
+public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -25,7 +25,7 @@ public class usuarioService {
     }
 
     public static Usuario save(Usuario usuario) {
-        return usuarioService.save(usuario);
+        return UsuarioService.save(usuario);
 
     }
 
