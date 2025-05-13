@@ -1,13 +1,10 @@
 package com.eckomarket.cl.eckomarket.controller;
 
 import com.eckomarket.cl.eckomarket.model.Usuario;
-import com.eckomarket.cl.eckomarket.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,7 +12,7 @@ import java.util.List;
 @RequestMapping("/api/v1/usuarios")
 public class EcomarketController {
     @Autowired
-    private UsuarioService usuarioService;
+    private com.eckomarket.cl.eckomarket.service.usuarioService usuarioService;
 
     @GetMapping
     public ResponseEntity<List<Usuario>> listar(){
@@ -25,4 +22,49 @@ public class EcomarketController {
         }
         return ResponseEntity.ok(usuario);
     }
+    @PostMapping
+    public ResponseEntity<Usuario> guardar(@RequestBody Usuario usuario) {
+        Usuario productoNuevo = com.eckomarket.cl.eckomarket.service.usuarioService.save(usuario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(productoNuevo);
+
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Usuario> buscar(@PathVariable Integer id) {
+        try {
+            Usuario usuario = usuarioService.findById(id);
+            return ResponseEntity.ok(usuario);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Usuario> actualizar(@PathVariable Integer id, @RequestBody Usuario usuario) {
+        try {
+            Usuario usr = usuarioService.findById(id);
+            usr.setId(id);
+            usr.setRun(usuario.getRun());
+            usr.setNombres(usuario.getNombres());
+            usr.setApellidos(usuario.getApellidos());
+            usr.setFechaNacimiento(usuario.getFechaNacimiento());
+            usr.setCorreo(usuario.getCorreo());
+
+            usuarioService.save(usr);
+            return ResponseEntity.ok(usuario);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> eliminar(@PathVariable Long id) {
+        try {
+            usuarioService.delete(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 }
