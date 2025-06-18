@@ -25,7 +25,7 @@ public class UsuarioController {
     }
     @PostMapping
     public ResponseEntity<Usuario> guardar(@RequestBody Usuario usuario) {
-        Usuario productoNuevo = UsuarioService.save(usuario);
+        Usuario productoNuevo = usuarioService.save(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(productoNuevo);
 
     }
@@ -58,7 +58,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id) {
+    public ResponseEntity<?> eliminar(@PathVariable Integer id) {
         try {
             usuarioService.delete(id);
             return ResponseEntity.noContent().build();

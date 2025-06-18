@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 
-@Profile("default")
+@Profile("dev")
 @Component
 public class DataLoader implements CommandLineRunner {
 
